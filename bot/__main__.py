@@ -35,16 +35,21 @@ def stats(update, context):
     cpuUsage = psutil.cpu_percent(interval=0.5)
     memory = psutil.virtual_memory().percent
     disk = psutil.disk_usage('/').percent
-    stats = f'<b>Bot Uptime:</b> {currentTime}\n' \
-            f'<b>Start Time:</b> {current}\n' \
-            f'<b>Total Disk Space:</b> {total}\n' \
-            f'<b>Used:</b> {used}  ' \
-            f'<b>Free:</b> {free}\n\n' \
-            f'📊Data Usage📊\n<b>Upload:</b> {sent}\n' \
-            f'<b>Download:</b> {recv}\n\n' \
-            f'<b>CPU:</b> {cpuUsage}%\n' \
-            f'<b>RAM:</b> {memory}%\n' \
-            f'<b>DISK:</b> {disk}%'
+    stats = f'╭───『🤖 𝑩𝒐𝒕 𝑺𝒕𝒂𝒕𝒊𝒄𝒔 🤖』\n│\n├─⏳<b>Bot Uptime:</b> {currentTime}\n│\n'\
+            f'├─💽<b>Storage:</b> {total}\n'\
+            f'├─💻<b>Used:</b> {used}\n├─💾<b>Free:</b> {free}\n'\
+            f'├─📤<b>Upload:</b> {sent}\n'\
+            f'├─📥<b>Download:</b> {recv}\n│\n'\
+            f'├─🖥️<b>CPU:</b> {cpuUsage}%\n'\
+            f'├─📏<b>RAM:</b> {mem_p}%\n'\
+            f'├─💿<b>DISK:</b> {disk}%\n│\n'\
+            f'├─🛰️<b>Physical Cores:</b> {p_core}\n'\
+            f'├─⚙️<b>Total Cores:</b> {t_core}\n'\
+            f'├─⚡<b>SWAP:</b> {swap_t}\n├─🔱<b>Used:</b> {swap_p}%\n│\n'\
+            f'├─💽<b>Memory Total:</b> {mem_t}\n'\
+            f'├─💾<b>Memory Free:</b> {mem_a}\n'\
+            f'├─💻<b>Memory Used:</b> {mem_u}\n│\n'\
+            f'╰───『💥 <a href="https://t.me/+SpnPh2Gc8kHwwAAF"><b>𝐑𝐨𝐨𝐭 𝐆𝐚𝐦𝐞𝐫</b></a> 💥』\n'
     update.effective_message.reply_photo(IMAGE_URL, stats, parse_mode=ParseMode.HTML)
 
 
@@ -60,7 +65,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
     uptime = get_readable_time((time.time() - botStartTime))
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
         if update.message.chat.type == "private" :
-            sendMessage(f"Hey I'm Alive 🙂\nSince: <code>{uptime}</code>", context.bot, update)
+            sendMessage(f"I am on your duty sir 🤕\nSince: <code>{uptime}</code>", context.bot, update)
         else :
             update.effective_message.reply_photo(IMAGE_URL, start_string, parse_mode=ParseMode.MARKDOWN, reply_markup=reply_markup)
     else :
@@ -208,7 +213,7 @@ def main():
     if os.path.isfile(".restartmsg"):
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
-        bot.edit_message_text("Restarted successfully!", chat_id, msg_id)
+        bot.edit_message_text("Feeling good after refreshing 😌 \n ready for duty", chat_id, msg_id)
         os.remove(".restartmsg")
     bot.set_my_commands(botcmds)
 
